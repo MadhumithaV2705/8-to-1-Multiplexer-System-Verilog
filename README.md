@@ -89,31 +89,53 @@ A **Multiplexer (MUX)** is a combinational logic circuit that selects one of sev
 
 ## SystemVerilog Code  
 
-### Multiplexer Design (`mux8to1.sv`)
+### Multiplexer Design
 ```systemverilog
-module mux8to1 (
-    input  logic [7:0] D,       // Data inputs
-    input  logic [2:0] Sel,     // Select lines
-    output logic Y              // Output
+module mux8to1_case (
+  input  logic [7:0] d,   
+  input  logic [2:0] sel, 
+  output logic       y   
 );
 
-    // Write code here using case statement or conditional operator
+ 
+  always_comb begin
+    case (sel)
+      3'b000: y = d[0];
+      3'b001: y = d[1];
+      3'b010: y = d[2];
+      3'b011: y = d[3];
+      3'b100: y = d[4];
+      3'b101: y = d[5];
+      3'b110: y = d[6];
+      3'b111: y = d[7];
+      default: y = 1'b0;  
+    endcase
+  end
 
 endmodule
-
 ```
 ### Testbench code (`mux8to1_tb.sv`)
 ```systemverilog
-module mux8to1_tb;
+module tb_mux8to1_case;
 
-    // Declare testbench signals here
+  logic [7:0] d;
+  logic [2:0] sel;
+  logic y;
+  mux8to1_case uut (d, sel, y);
 
-    // Instantiate the DUT (Design Under Test)
+  initial begin
+  
+    d = 8'b10101010; // alternate 1s and 0s
 
-    // Apply stimulus to inputs
+    $display("Time | Sel | Output");
+    for (int i = 0; i < 8; i++) begin
+      sel = i;
+      #10;
+      $display("%0t   | %0d   | %0b", $time, sel, y);
+    end
 
-    // Monitor outputs
-
+    $finish;
+  end
 endmodule
 ```
 
@@ -121,15 +143,7 @@ endmodule
 
 ### Simulation Output
 
-The simulation is carried out using ModelSim 2020.1.
-
-Waveforms will display the selected input line being passed to the output according to the select signals.
-
-(Insert waveform screenshot after running simulation in ModelSim)
-
-
 ---
-
 ### Result
 
 The design and functional verification of an 8:1 Multiplexer using SystemVerilog HDL was successfully carried out in ModelSim 2020.1.
