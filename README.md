@@ -142,7 +142,7 @@ endmodule
 ---
 
 ### Simulation Output
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d5fdf013-8a1a-4a0c-a3de-787b356775bb" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1ffbeea1-124b-4b76-901d-94018221c458" />
 
 ---
 ### Result
